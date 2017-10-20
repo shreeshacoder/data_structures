@@ -1,0 +1,100 @@
+package solution;
+
+import java.util.Arrays;
+import java.io.*;
+import java.util.*;
+
+/**
+ * @author Shreesha
+ */
+/* QUESTION 
+Write a function rotate(ar[], d, size) that rotates arr[] by d elements. Could be left or right rotate.
+http://www.geeksforgeeks.org/array-rotation
+
+ALGORITHM
+Left rotate and right rotate are similar. They are minute changes between them.
+For left rotate,
+->Reverse the elements from index 0 to d-1
+->Reverse elements from index d to size-1
+->Reverse the entire array
+
+For right rotate,
+->Reverse the elements from index size-d to size-1
+->Reverse the elemtns from index 0 to size-d-1
+->Reverse the entire array
+
+Algorithm for reverse is written above the reverse method
+
+*/
+
+public class Solution {
+
+    private int[] array = new int[] {1, 2, 3 ,4, 5}; //array to be left or right rotated
+    
+    public void rotate(int shift) {
+        System.out.println("Enter 1 for right rotate, 2 for left rotate:");
+        Scanner s = new Scanner(System.in);
+        int choice = s.nextInt();
+        switch(choice) {
+        case 1: 
+        array_right_rotate(shift); //right_rotate
+            break;
+        case 2:
+            array_left_rotate(shift); //left_rotate
+            break;
+        default:
+            System.out.println("Wrong choice");           
+        
+    }
+        
+    }
+    public void array_left_rotate(int move_value){
+        
+        int array_size = array.length;
+        if(move_value == array_size) 
+            return; //if move_value = size of array, original array is the result
+        reverse(array,0,move_value-1); 
+        reverse(array,move_value,array_size-1);
+        reverse(array,0,array_size-1);
+        
+    }
+    
+    public void array_right_rotate(int move_value){
+        
+        int array_size = array.length;
+        if(move_value == array_size)
+            return;  //if move_value = size of array, original array is the result
+        reverse(array,0,array_size-move_value-1);
+        reverse(array,array_size-move_value,array_size-1);
+        reverse(array,0,array_size-1);
+        
+    }
+    
+    /*
+    Algorithm for reversing an array
+    ->Set the start index and end index of the array
+    ->While end index greater than start index, swap element at start and end. Increment start and decrement end
+    */
+    
+    public void reverse(int array[], int start, int end){
+        int temp;
+        while(start<end){
+            temp = array[start];
+            array[start] = array[end];
+            array[end] = temp;
+            end--;
+            start++;
+        }
+    }
+    public static void main(String[] args) {
+       
+       int shift = 2; //the number of times array has to be rotated
+        Solution s = new Solution();
+        s.rotate(shift);
+        System.out.println(Arrays.toString(s.array));
+        
+        
+        
+    }
+    
+}
