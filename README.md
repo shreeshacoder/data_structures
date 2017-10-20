@@ -1,3 +1,3 @@
 # data_structures
 This repository contains my solutions for Data Structures questions available on geeksforgeeks.com .
-I have added the question as comment in the code.
+For each problem, I have included the question and link as comments in the code. Happy Coding!
