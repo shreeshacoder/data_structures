@@ -9,7 +9,7 @@ import java.util.*;
  */
 /* QUESTION 
 Write a function rotate(ar[], d, size) that rotates arr[] by d elements. Could be left or right rotate.
-http://www.geeksforgeeks.org/array-rotation
+http://www.geeksforgeeks.org/array-rotation/
 
 ALGORITHM
 Left rotate and right rotate are similar. They are minute changes between them.
