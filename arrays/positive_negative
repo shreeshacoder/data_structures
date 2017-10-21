@@ -1,0 +1,51 @@
+package solution;
+
+import java.util.Arrays;
+import java.io.*;
+import java.util.*;
+
+/**
+ * @author Shreesha
+ */
+
+/*QUESTION
+Rearrange positive and negative numbers in O(n) time and O(1) extra space
+*/
+
+ 
+class Solution {
+ 
+    /*based on quicksort. sorts negative and positive elements. 
+    Then, swap every alternate negative number with every consecutive number*/
+    public void rearrange(int array[]) { 
+        int j = 0, i = -1, key = 0, temp;
+        while(j<array.length){
+            if(array[j]<key){
+                i++;
+                //swap
+                temp = array[j];
+                array[j] = array[i];
+                array[i] = temp;
+                               
+            }
+            j++;
+        }    
+        //pos is the starting index of positive numbers and neg is starting index of negative numbers
+        int pos = i+1, neg = 0; 
+        while(pos<array.length && array[neg]<array[pos] && neg<pos){
+            temp = array[pos];
+            array[pos] = array[neg];
+            array[neg] = temp;
+            neg+=2;
+            pos++;
+        }
+    }
+  
+    public static void main (String[] args)
+    {
+        int[] array = new int[] {2, -3, 5, -1, 7};
+        Solution s = new Solution();
+        s.rearrange(array);
+        System.out.println(Arrays.toString(array));
+    }
+}
