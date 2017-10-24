@@ -1,0 +1,75 @@
+package solution;
+
+import java.util.Arrays;
+import java.io.*;
+import java.util.*;
+
+/**
+ * @author Shreesha
+ */
+
+/*QUESTION
+Given an array of positive and negative numbers, arrange them such that all negative integers appear 
+before all the positive integers in the array without using any additional data structure like hash table,
+arrays, etc. The order of appearance should be maintained.
+
+link: http://www.geeksforgeeks.org/rearrange-positive-and-negative-numbers/
+
+Algorithm:
+Use divide and conquer paradigm used in merge sort.
+Each array is in the formate left-negative, left-postive, right-negative, right-positive.
+We have to swap left-positive and right=negative, so we apply the reverse(left-positive), reverse(right-negative)
+and reverse(left-positive, right-negative)
+*/
+
+ 
+class Solution {
+ 
+    public void reverseSort(int array[], int start, int end) {
+        if(start>=end)
+            return;
+        int mid = (start+end)/2;
+        reverseSort(array, start, mid);
+        reverseSort(array, mid+1, end);
+        merge(array, start, mid, end);
+                  
+    }
+    
+    public void swap(int array[], int i, int j) {
+        
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    public void reverse(int array[], int start, int end) {
+        while(start<end){
+            swap(array, start, end);
+            start++;
+            end--;
+        }
+        
+    }
+    
+    public void merge(int array[], int start, int mid, int end) {
+        int size_l = mid-start+1, size_r = end-mid;
+        
+        int i=0, j=mid+1;
+        while(i<=mid && array[i]<0)
+            i++;
+        while(j<=end && array[j]<0)
+            j++;
+        reverse(array, i, mid);
+        reverse(array, mid+1, j-1);
+        reverse(array, i, j-1);
+        
+            
+    }
+  
+    public static void main (String[] args)
+    {
+        int[] array = new int[] {2, -3, 5, -1, 7};
+        Solution s = new Solution();
+        s.reverseSort(array, 0, array.length-1);
+        System.out.println(Arrays.toString(array));
+    }
+}
