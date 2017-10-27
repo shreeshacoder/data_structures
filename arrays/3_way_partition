@@ -1,0 +1,61 @@
+package solution;
+
+import java.util.Arrays;
+import java.io.*;
+import java.util.*;
+
+/**
+ * @author Shreesha
+ */
+
+/*QUESTION
+Three way partitioning of an array around a given range
+
+link: http://www.geeksforgeeks.org/three-way-partitioning-of-an-array-around-a-given-range/
+
+ALgorithm:
+Based on the quicksort algorithm.
+Arrange the elements less than the lower limit
+Arrange the elements greater than the upper limit
+*/
+
+ 
+class Solution {
+
+    public void swap(int array[], int i, int j) {
+        int temp;
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    public void three_way(int array[], int low, int high) {
+        int i = 0, n = array.length;
+        int start = 0, end = n-1;
+        while(i<array.length) {
+            
+            if(array[i]<low){
+                swap(array, i++, start++);
+                
+            }
+            else if(array[i]>high){
+                swap(array, i, end--);
+                
+            }
+            else
+                i++;
+        }
+        System.out.println(Arrays.toString(array));
+    }   
+            
+    
+  
+    public static void main (String[] args)
+    {
+        int array[] = new int[] {11, 9, 5 ,3, 2};
+        int low = 4, high = 10;
+        Solution s = new Solution();
+        s.three_way(array, low, high);
+    }
+    
+}
+    
