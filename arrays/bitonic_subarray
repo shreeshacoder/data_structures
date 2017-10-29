@@ -1,0 +1,72 @@
+package solution;
+
+import java.util.Arrays;
+import java.io.*;
+import java.util.*;
+
+/**
+ * @author Shreesha
+ */
+
+/*QUESTION
+Given an array A[0 … n-1] containing n positive integers, a subarray A[i … j] is bitonic if there 
+is a k with i <= k <= j such that A[i] <= A[i + 1] ... <= A[k] >= A[k + 1] >= .. A[j – 1] > = A[j].
+
+link: http://www.geeksforgeeks.org/maximum-length-bitonic-subarray/
+
+
+
+Algorithm Efficiency: Time complexity O(n), Space Complexity: O(1)
+
+*/
+
+ 
+class Solution {
+    
+    public int bioatonic(int array[]) {
+        int i, curr, max, flag = 0, n = array.length;
+        if(n == 0)
+            return 0;
+        curr = 1;
+        max = 1;
+        for(i = 1;i<n;i++){
+            if(array[i-1]< array[i]) {
+                if(flag == 0)
+                    curr++;
+                else{
+                    if(curr>max)
+                        max = curr;     
+                curr = 2;
+                flag = 0;
+                }
+            }
+            else if(array[i-1] >array[i]) {
+                flag = 1;
+                curr++;
+            }
+            else 
+                curr++;
+            
+        }
+        if(curr>max)
+            max = curr;
+        return max;
+        
+        
+    }
+
+   
+            
+    
+  
+    public static void main (String[] args)
+    {
+        int array[] = new int[] {40, 30, 20, 10};
+        Solution s = new Solution();
+        System.out.println(s.bioatonic(array));
+        
+        
+    }
+    
+}
+    
