@@ -1,0 +1,52 @@
+Question: Given a linked list and two keys in it, swap nodes for two given keys. Nodes should be swapped by changing links. 
+Swapping data of nodes may be expensive in many situations when data contains many fields.
+
+Link: http://www.geeksforgeeks.org/swap-nodes-in-a-linked-list-without-swapping-data/
+
+class LinkedList<E>
+{
+
+
+//a Generic Linked List node
+    Node head;  
+    static class Node<E> {
+        E data;
+        Node next;
+        Node(E d)  { data = d;  next=null; } // Constructor
+    }
+    
+    
+    public void swapNodes(E x, E y) {
+       if(head == null)
+           return;
+       Node prevx = null, prevy = null, currx = head, curry = head;
+       
+       while(currx != null && currx.data != x ) {
+           prevx = currx;
+           currx = currx.next;
+       }
+       while(curry != null && curry.data != y ){
+           prevy = curry;
+           curry = curry.next;
+       }
+       
+       if(prevx!=null)
+           prevx.next = curry;
+       else
+           head = curry;
+       
+       if(prevy!=null)
+           prevy.next = currx;
+       else
+           head = currx;
+       
+       Node temp;
+       
+       temp = currx.next;
+       currx.next = curry.next;
+       curry.next = temp;
+           
+    
+    } 
+    
+    }
